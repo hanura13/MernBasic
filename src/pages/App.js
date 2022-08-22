@@ -1,10 +1,10 @@
-
-import { Routes } from '../config';
+import React from 'react';
+import { MyRoutes } from '../config';
 import './App.css';
 
 function App() {
   return (
-    <Routes/>
+    <MyRoutes/>
   );
 }
 
