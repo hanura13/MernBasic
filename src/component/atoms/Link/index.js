@@ -1,9 +1,10 @@
 import React from 'react'
+import './link.scss'
 
 const MyLink = ({title, onClick}) => {
   return (
     <div>
-        <p>{title}</p>
+        <p className="link">{title}</p>
     </div>
   )
 }

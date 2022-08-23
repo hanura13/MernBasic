@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginBg, RegisterBg } from '../../assets';
+import { RegisterBg } from '../../assets';
 import { Gap, MyButton, MyLink } from '../../component/atoms';
 import MyInput from '../../component/atoms/input';
 import './register.scss'
@@ -19,6 +19,7 @@ const Register = () => {
             <MyInput label="Password" placeholder="Password"/>
             <Gap height={50}/>
             <MyButton title="Register"/>
+            <Gap height={60}/>
             <MyLink title="Kembali ke Login"/>
         </div>
     </div>
