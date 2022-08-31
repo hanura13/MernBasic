@@ -1,18 +1,62 @@
-import React from 'react'
-import { MyButton } from '../../component/atoms';
+import React, { useEffect, useState } from 'react'
+import './home.scss'
+import { Gap, MyButton } from '../../component/atoms';
+import { BlogItem } from '../../component/molecules';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setDataBlog } from '../../config/redux/action';
 
 
-function Home() {
-  return (
-    <div>
-        <div>
-            <MyButton title="Create Blog"/>
+
+const Home =() => {
+    const [counter, setCounter] = useState(1);
+    const {dataBlog, page} = useSelector(state => state.homeReducer);
+    const dispatch = useDispatch();
+    console.log(page)
+    
+    useEffect(() => {
+        dispatch(setDataBlog(counter))
+      
+    }, [dispatch])
+    
+    const navigate = useNavigate();
+
+    const previous = () => {
+        setCounter(counter <= 1 ? 1 : counter - 1)
+        console.log(counter)
+    }
+
+    const next = () => {
+        setCounter(counter + 1)
+        console.log(counter)
+    }
+    return ( 
+    <div className="home-app-wrapper">
+        <div className="create-wrapper">
+            <MyButton title="Create Blog" onClick={() => navigate('/create-blog')}/>
         </div>
-        <p>Blog Content</p>
-        <p>Blog Content</p>
-        <p>Blog Content</p>
-        <p>Blog Content</p>
-        <p>Pagination</p>
+        <Gap height={20}/>
+        <div className="content-wrapper">
+            {dataBlog.map(blog => {
+                return <BlogItem key={blog._id} 
+                image={`http://localhost:4000/${blog.image}`}
+                title={blog.title}
+                body={blog.body}
+                name={blog.author.name}
+                date={blog.createdAt}/>
+            })}
+        
+        </div>
+       
+        <div className="pagination">
+            <MyButton title="Previous" onClick={previous}/>
+            <Gap width={20}/>
+            <p className="text-page">1 / 3 </p>
+            <Gap width={20}/>
+            <MyButton title="Next" onClick={next}/>
+        </div>
+        <Gap height={20}/>
     </div>
   )
 }

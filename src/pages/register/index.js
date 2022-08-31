@@ -1,11 +1,13 @@
 import React from 'react'
 import { RegisterBg } from '../../assets';
+import { useNavigate } from 'react-router-dom';
 import { Gap, MyButton, MyLink } from '../../component/atoms';
 import MyInput from '../../component/atoms/input';
 import './register.scss'
 
 const Register = () => {
-  return (
+    const navigate = useNavigate();
+    return (
     <div className="main-page">
         <div className="left">
             <img src={RegisterBg} className="bg-image" alt="imgBg"/>
@@ -20,7 +22,7 @@ const Register = () => {
             <Gap height={50}/>
             <MyButton title="Register"/>
             <Gap height={60}/>
-            <MyLink title="Kembali ke Login"/>
+            <MyLink title="Kembali ke Login" onClick={()=> navigate('/login')}/>
         </div>
     </div>
   )

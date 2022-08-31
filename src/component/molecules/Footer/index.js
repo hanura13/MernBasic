@@ -1,6 +1,6 @@
 import React from 'react'
 import './footer.scss'
-import { ICDiscord, ICFacebook, ICGithub, ICInstagram, ICTelegram, LogoSundev } from '../../../assets'
+import { ICDiscord, ICFacebook, ICGithub, ICInstagram, ICTelegram } from '../../../assets'
 
 const Icon = ({img}) => {
     return(

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MyFooter from '../../component/molecules/Footer';
 import MyHeader from '../../component/molecules/Header';
 import CreateBlog from '../CreateBlog';
