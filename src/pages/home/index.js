@@ -3,7 +3,6 @@ import './home.scss'
 import { Gap, MyButton } from '../../component/atoms';
 import { BlogItem } from '../../component/molecules';
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDataBlog } from '../../config/redux/action';
 
@@ -18,7 +17,7 @@ const Home =() => {
     useEffect(() => {
         dispatch(setDataBlog(counter))
       
-    }, [dispatch])
+    }, [counter])
     
     const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const Home =() => {
     }
 
     const next = () => {
-        setCounter(counter + 1)
+        setCounter(counter === page.totalPage ? page.totalPage : counter +1)
         console.log(counter)
     }
     return ( 
@@ -44,7 +43,8 @@ const Home =() => {
                 title={blog.title}
                 body={blog.body}
                 name={blog.author.name}
-                date={blog.createdAt}/>
+                date={blog.createdAt}
+                _id={blog._id}/>
             })}
         
         </div>
@@ -52,7 +52,8 @@ const Home =() => {
         <div className="pagination">
             <MyButton title="Previous" onClick={previous}/>
             <Gap width={20}/>
-            <p className="text-page">1 / 3 </p>
+            <p className="text-page">{page.currentPage} / {page.totalPage}</p>
+
             <Gap width={20}/>
             <MyButton title="Next" onClick={next}/>
         </div>

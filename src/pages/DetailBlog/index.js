@@ -2,7 +2,7 @@ import React from 'react';
 import './detailBlog.scss'
 import { RegisterBg } from '../../assets';
 import { Gap, MyLink } from '../../component';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const DetailBlog = ()=> {
 const navigate = useNavigate();
@@ -18,4 +18,4 @@ const navigate = useNavigate();
   )
 }
 
-export default DetailBlog;
+export default Navigate(DetailBlog);
