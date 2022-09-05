@@ -5,6 +5,9 @@ import { BlogItem } from '../../component/molecules';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDataBlog } from '../../config/redux/action';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import Axios from 'axios';
 
 
 
@@ -12,23 +15,47 @@ const Home =() => {
     const [counter, setCounter] = useState(1);
     const {dataBlog, page} = useSelector(state => state.homeReducer);
     const dispatch = useDispatch();
-    console.log(page)
+
     
     useEffect(() => {
         dispatch(setDataBlog(counter))
       
-    }, [counter])
+    })
     
     const navigate = useNavigate();
 
     const previous = () => {
         setCounter(counter <= 1 ? 1 : counter - 1)
-        console.log(counter)
+        
     }
 
     const next = () => {
         setCounter(counter === page.totalPage ? page.totalPage : counter +1)
-        console.log(counter)
+    }
+
+    const confirmDelete = (id) => {
+        confirmAlert({
+            title: 'Confirm to Delete',
+            message: 'Apakah anda yakin akan menghapus?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    Axios.delete(`http://localhost:4000/v1/blog/post/${id}`)
+                    .then(res => {
+                        console.log('Sukses delete ', res.data)
+                    })
+                    .catch(err => {
+                        console.log('Error: ', err)
+                    })
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('User tidak setuju')
+              }
+            ]
+          });
     }
     return ( 
     <div className="home-app-wrapper">
@@ -44,7 +71,9 @@ const Home =() => {
                 body={blog.body}
                 name={blog.author.name}
                 date={blog.createdAt}
-                _id={blog._id}/>
+                _id={blog._id}
+                onDelete={confirmDelete}/>
+                
             })}
         
         </div>

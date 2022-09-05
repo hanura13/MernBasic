@@ -15,7 +15,9 @@ function MainApp() {
 
         <div className="content-wrapper">
             <Routes>
-                <Route path="/create-blog" exact element={<CreateBlog/>}/>
+                <Route path="/create-blog" exact element={<CreateBlog/>}>
+                    <Route path=":id" element={<CreateBlog/>}/>
+                </Route>
                 <Route path="/detail-blog/:id" exact element={<DetailBlog/>}/>
                 <Route path="/" exact element={<Home/>}/>
             </Routes>
